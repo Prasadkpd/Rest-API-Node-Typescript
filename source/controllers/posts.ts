@@ -34,8 +34,8 @@ const updatePost = async (request: Request, response: Response) => {
   //get the post id from the Request
   let id: string = request.params.id;
   //get the data from Request Body
-  let title: string = request.params.title ?? null;
-  let body: string = request.params.body ?? null;
+  let title: string = request.body.title ?? null;
+  let body: string = request.body.body ?? null;
   //update the post
   let result: AxiosResponse = await axios.put(`https://jsonplaceholder.typicode.com/posts/${id}`, {
     ...(title && {title}),
