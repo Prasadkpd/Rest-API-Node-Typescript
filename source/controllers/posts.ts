@@ -37,7 +37,7 @@ const updatePost = async (request: Request, response: Response) => {
   let title: string = request.params.title ?? null;
   let body: string = request.params.body ?? null;
   //update the post
-  let result: AxiosResponse = await axios.put(`https://jsonplaceholder.typicode.com/posts/${id}`,{
+  let result: AxiosResponse = await axios.put(`https://jsonplaceholder.typicode.com/posts/${id}`, {
     ...(title && {title}),
     ...(body && {body})
   });
@@ -45,7 +45,18 @@ const updatePost = async (request: Request, response: Response) => {
   return response.status(200).json({
     message: result.data
   })
-
 }
 
-export default {getPosts, getPost, updatePost}
+//deleting a post
+const deletePost = async (request: Request, response: Response) => {
+  //get the post id from the Request
+  let id: string = request.params.id;
+  //delete the post
+  let result: AxiosResponse = await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  // return response
+  return response.status(200).json({
+    message: 'Post deleted successfully'
+  });
+};
+
+export default {getPosts, getPost, updatePost, deletePost}
