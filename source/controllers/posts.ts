@@ -59,4 +59,19 @@ const deletePost = async (request: Request, response: Response) => {
   });
 };
 
-export default {getPosts, getPost, updatePost, deletePost}
+//adding a post
+const addPost = async (request: Request, response: Response) => {
+  //get the data from request body
+  let title: string = request.body.title;
+  let body: string = request.body.body;
+  //add the post
+  let result: AxiosResponse = await axios.post(`https://jsonplaceholder.typicode.com/posts`, {
+    title,
+    body
+  });
+  //return result
+  return response.status(200).json({
+    message: result.data
+  });
+};
+export default {getPosts, getPost, updatePost, deletePost, addPost};
